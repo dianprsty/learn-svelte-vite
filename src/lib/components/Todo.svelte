@@ -1,0 +1,27 @@
+<script>
+  const { id, name, done } = $props();
+
+  const emojis = {
+    "1": "👍",
+    "2": "👎",
+    "3": "❤️",
+    "4": "🤣",
+    "5": "🚀",
+    "6": "🤷"
+  }
+
+  const emoji = emojis[id];
+  console.log(emoji);
+</script>
+
+{#if done}
+<span class="done">{id} - {name} {emoji}</span>
+{:else}
+<span>{id} - {name} {emoji}</span>
+{/if}
+
+<style>
+  .done {
+    text-decoration: line-through;
+  }
+</style>
