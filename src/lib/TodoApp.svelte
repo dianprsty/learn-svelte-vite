@@ -1,6 +1,7 @@
 <script>
   import EditTodo from "./components/EditTodo.svelte";
   import Todo from "./components/Todo.svelte";
+  import { fade, slide, fly } from "svelte/transition";
 
   let todos = $state([
     {
@@ -73,15 +74,23 @@
 
 <section>
   {#each todos as todo (todo.id)}
-    {#if todo.edit}
-      <EditTodo id={todo.id} name={todo.name} {onEdit} />
-    {:else}
-      <span class="todo-list-group">
-        <Todo {...todo} />
-        <button onclick={() => edit(todo.id)}>Edit</button>
-        <button onclick={() => remove(todo.id)}>Remove</button>
-      </span>
-    {/if}
+    <span in:fly={{ y: 100, duration: 1500 }} out:slide={{ duration: 750 }}
+    onintrostart={()=> console.log('intro start')}
+    onoutrostart={()=> console.log('outro start')}
+    onintroend={()=> console.log('intro end')}
+    onoutroend={()=> console.log('outro end')}
+    
+    >
+      {#if todo.edit}
+        <EditTodo id={todo.id} name={todo.name} {onEdit} />
+      {:else}
+        <span class="todo-list-group">
+          <Todo {...todo} />
+          <button onclick={() => edit(todo.id)}>Edit</button>
+          <button onclick={() => remove(todo.id)}>Remove</button>
+        </span>
+      {/if}
+    </span>
   {/each}
 </section>
 
