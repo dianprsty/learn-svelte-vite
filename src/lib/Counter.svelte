@@ -26,9 +26,9 @@
     count = [];
   };
 
-  $inspect(count).with((type, value) =>{
-    console.log(type, value)
-  })
+  $inspect(count).with((type, value) => {
+    console.log(type, value);
+  });
 </script>
 
 <main>
@@ -36,7 +36,7 @@
 
   <section class="counter-group">
     <button onclick={decrement}> - </button>
-    <p>
+    <p class={total % 2 === 0 ? "red" : "blue"}>
       {total}
     </p>
 
@@ -45,7 +45,7 @@
   <button onclick={reset}> reset </button>
 
   <h2>History</h2>
-  <p>
+  <p style:color="gold">
     {count.map((n) => (n > 0 ? `+${n}` : `${n}`)).join(", ")}
   </p>
 </main>
@@ -61,5 +61,13 @@
     display: flex;
     gap: 2rem;
     margin-bottom: 2rem;
+  }
+
+  .red {
+    color: red;
+  }
+
+  .blue {
+    color: blue;
   }
 </style>
