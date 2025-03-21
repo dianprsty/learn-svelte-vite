@@ -13,7 +13,7 @@
 </script>
 
 <svelte:body onmousemove={handleMouseMove} />
-<svelte:document onclick={handleClick} />
+<svelte:document  onclick={handleClick} />
 
 <p>{message}</p>
 
