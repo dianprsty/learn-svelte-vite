@@ -70,27 +70,32 @@
   <button type="submit">Add</button>
 </form>
 
+{#snippet todoRow(todo)}
+  <span
+    in:fly={{ y: 100, duration: 1500 }}
+    out:slide={{ duration: 750 }}
+    onintrostart={() => console.log("intro start")}
+    onoutrostart={() => console.log("outro start")}
+    onintroend={() => console.log("intro end")}
+    onoutroend={() => console.log("outro end")}
+  >
+    {#if todo.edit}
+      <EditTodo id={todo.id} name={todo.name} {onEdit} />
+    {:else}
+      <span class="todo-list-group">
+        <Todo {...todo} />
+        <button onclick={() => edit(todo.id)}>Edit</button>
+        <button onclick={() => remove(todo.id)}>Remove</button>
+      </span>
+    {/if}
+  </span>
+{/snippet}
+
 <h2>List Todo</h2>
 
 <section>
   {#each todos as todo (todo.id)}
-    <span in:fly={{ y: 100, duration: 1500 }} out:slide={{ duration: 750 }}
-    onintrostart={()=> console.log('intro start')}
-    onoutrostart={()=> console.log('outro start')}
-    onintroend={()=> console.log('intro end')}
-    onoutroend={()=> console.log('outro end')}
-    
-    >
-      {#if todo.edit}
-        <EditTodo id={todo.id} name={todo.name} {onEdit} />
-      {:else}
-        <span class="todo-list-group">
-          <Todo {...todo} />
-          <button onclick={() => edit(todo.id)}>Edit</button>
-          <button onclick={() => remove(todo.id)}>Remove</button>
-        </span>
-      {/if}
-    </span>
+    {@render todoRow(todo)}
   {/each}
 </section>
 
